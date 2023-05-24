@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Servises\Websocket\DTO\WebSocketDto;
+use App\Servises\Websocket\Models\WebSocketSwitch;
 use Illuminate\Support\Facades\Log;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
@@ -13,23 +14,25 @@ class WebSocketController extends Controller implements MessageComponentInterfac
 
     protected $chanels;
 
-    function onOpen(ConnectionInterface $conn)
+    public function onOpen(ConnectionInterface $conn)
     {
         $this->clients->attach($conn);
     }
 
-    function onClose(ConnectionInterface $conn)
+    public function onClose(ConnectionInterface $conn)
     {
         $this->clients->detach($conn);
     }
 
-    function onError(ConnectionInterface $conn, \Exception $e)
+    public function onError(ConnectionInterface $conn, \Exception $e)
     {
         Log::error("An error has occurred: {$e->getMessage()}");
     }
 
-    function onMessage(ConnectionInterface $from, $msg)
+    public function onMessage(ConnectionInterface $from, $msg)
     {
-        // TODO: Implement onMessage() method.
+        $dto = WebSocketDto::fromJson($msg);
+
+        (WebSocketSwitch::execute($dto->messageType))->run($dto->message);
     }
 }
