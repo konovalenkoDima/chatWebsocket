@@ -3,9 +3,23 @@ export default {
   content: [
       "./resources/**/*.blade.php",
       "./resources/**/*.js",
+      "./resources/**/*.vue"
   ],
   theme: {
-    extend: {},
+    extend: {
+        color: {
+            back: "linear-gradient(to bottom, blue, pink)",
+            errortext: "#D63301",
+            errorbg: "#FFCCBA",
+        },
+        fontFamily: {
+            montserrat: "font-family: montserrat"
+        },
+        margin: {
+            35: "35%",
+            28: "28%"
+        }
+    },
   },
   plugins: [],
 }
