@@ -30,7 +30,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $request->get("remember_me"))) {
             $request->session()->regenerate();
 
-            return redirect()->intended('welcome');
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
@@ -59,5 +59,16 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         return redirect()->route('welcome');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->regenerate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login.init');
     }
 }

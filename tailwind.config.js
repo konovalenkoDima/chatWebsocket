@@ -1,3 +1,4 @@
+let buttom;
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -18,6 +19,9 @@ export default {
         margin: {
             35: "35%",
             28: "28%"
+        },
+        width: {
+            message: "4/6"
         }
     },
   },
