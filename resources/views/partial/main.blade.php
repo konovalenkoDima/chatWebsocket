@@ -1,5 +1,5 @@
 <div class="grid grid-rows-6 divide-y divide-orange-500 h-full">
-    <div id="messages" class="p-4 row-span-5 flex flex-col bg-gradient-to-tr from-green-300 via-yellow-400 to-orange-500 gap-2">
+    <div id="messages" class="p-4 row-span-5 flex flex-col bg-gradient-to-tr from-green-100 via-yellow-200 to-orange-100 gap-2">
         <div id="outPutMessage" class="p-3 bg-green-200 max-w-prose  rounded-xl ml-auto">
             21321
         </div>
