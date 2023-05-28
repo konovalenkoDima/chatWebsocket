@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [\App\Http\Controllers\ChatController::class, "index"])
+    ->name("welcome")->middleware("auth");
+
+Route::controller(\App\Http\Controllers\AuthController::class)->group(function () {
+    Route::middleware('guest')->group(function (){
+        Route::get("/login", "login")->name('login.init');
+        Route::post("/login", "singIn")->name('login.post');
+        Route::get('/register', "register")->name('register.init');
+        Route::post('/register', "singUp")->name('register.post');
+    });
+    Route::get('/logout', "logout")->name("login.logout")->middleware('auth');
 });
