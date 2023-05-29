@@ -42,4 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function dialogs()
+    {
+        return $this->belongsToMany(Dialog::class, "dialog_user", "user_id", "dialog_id");
+    }
 }
