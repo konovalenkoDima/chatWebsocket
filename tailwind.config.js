@@ -21,7 +21,10 @@ export default {
             28: "28%"
         },
         width: {
-            message: "4/6"
+            message: "4/6",
+        },
+        spacing: {
+            add: "20%"
         }
     },
   },
