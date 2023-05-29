@@ -13,8 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\ChatController::class, "index"])
-    ->name("welcome")->middleware("auth");
+
+Route::controller(\App\Http\Controllers\ChatController::class)->middleware('auth')->group(function () {
+    Route::get('/', "index")->name("welcome");
+    Route::prefix('/chats')->group(function () {
+        Route::post('/', "searchChats")->name("chat.search");
+        Route::post("/add", "addChat")->name("chat.add");
+        Route::post("/new", "createGroupChat")->name("chat.new");
+        Route::prefix('/message')->group(function () {
+            Route::post("/", "getChatHistory")->name("message.history");
+        });
+    });
+    Route::post('/user', "searchUserByName")->name('user.search');
+});
+
 
 Route::controller(\App\Http\Controllers\AuthController::class)->group(function () {
     Route::middleware('guest')->group(function (){

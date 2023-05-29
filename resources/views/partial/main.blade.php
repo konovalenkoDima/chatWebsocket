@@ -1,14 +1,6 @@
 <div class="grid grid-rows-6 divide-y divide-orange-500 h-full">
-    <div id="messages" class="p-4 row-span-5 flex flex-col bg-gradient-to-tr from-green-300 via-yellow-400 to-orange-500 gap-2">
-        <div id="outPutMessage" class="p-3 bg-green-200 max-w-prose  rounded-xl ml-auto">
-            21321
-        </div>
-        <div id="outPutMessage" class="p-3 bg-white max-w-prose rounded-xl mr-auto">
-            21321
-        </div>
-        <div id="outPutMessage" class="p-3 bg-green-200 max-w-prose break-words rounded-xl ml-auto">
-            21321jjewyrgwkeuygridkwegfjhfbsdjhfgiwcuf6y23c78bgxrgrt8uXDGXRT21321jjewyrgwkeuygridkwegfjhfbsdjhfgiwcuf6y23c78bgxrgrt8uXDGXRT21321jjewyrgwkeuygridkwegfjhfbsdjhfgiwcuf6y23c78bgxrgrt8uXDGXRT21321jjewyrgwkeuygridkwegfjhfbsdjhfgiwcuf6y23c78bgxrgrt8uXDGXRT
-        </div>
+    <div id="messages" class="p-4 row-span-5 flex flex-col bg-gradient-to-tr from-green-100 via-yellow-200 to-orange-100 gap-2 overflow-hidden hover:overflow-auto">
+
     </div>
     <div class="bg-slate-100 flex">
         <textarea class="bg-slate-100 flex-auto h-full p-2 w-5/6 outline-none" placeholder="Type something..."></textarea>
@@ -16,3 +8,25 @@
         hover:outline-double">Send</button>
     </div>
 </div>
+
+<script>
+    var messages = document.getElementById("messages");
+
+    function getMessageHistory()
+    {
+        axios.post("{{route("message.history")}}", {
+            dialog_id: this.getAttribute("data-source")
+        })
+            .then(function (response) {
+                var history = response.data.messages;
+                history.forEach(function (value) {
+                    if (value.sender === response.data.currentUser) {
+                        messages.innerHTML = '<div class="p-3 bg-green-200 max-w-prose rounded-xl ml-auto">' + value.message + '</div>';
+                    } else {
+                        messages.innerHTML = '<div class="p-3 bg-green-200 max-w-prose break-words rounded-xl ml-auto">' + value.message + '</div>';
+
+                    }
+                })
+            })
+    }
+</script>
