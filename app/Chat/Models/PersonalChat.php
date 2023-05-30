@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class PersonalChat extends BaseChat implements \App\Chat\Interfaces\ChatInterface
 {
+    /**
+     * @param int $itemId
+     * @return false|string
+     */
     public function join(int $itemId)
     {
         $firstUser = Auth::user();
@@ -22,7 +26,8 @@ class PersonalChat extends BaseChat implements \App\Chat\Interfaces\ChatInterfac
 
         if (!empty($existDialog)) {
             return json_encode([
-                "status" => Response::HTTP_BAD_REQUEST
+                "status" => Response::HTTP_BAD_REQUEST,
+                "message" => "Chat exist"
             ]);
         }
 

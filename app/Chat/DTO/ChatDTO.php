@@ -11,6 +11,10 @@ class ChatDTO
 
     public int $type;
 
+    /**
+     * @param Request $request
+     * @return ChatDTO
+     */
     public static function fromRequest(Request $request)
     {
         $dto = new self();

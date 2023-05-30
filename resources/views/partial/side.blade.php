@@ -84,7 +84,7 @@
 
             .then(function (response) {
                 if (response.data.status === 400) {
-                    return ;
+                    getMessageHistory()
                 }
 
                 var chats = chatsArea.innerHTML;
