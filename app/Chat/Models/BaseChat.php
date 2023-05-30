@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class BaseChat
 {
+    /**
+     * @param array $membersIds
+     * @param int $dialogId
+     * @return void
+     */
     protected function addMembers(array $membersIds, int $dialogId)
     {
         DB::transaction(function () use ($membersIds, $dialogId){

@@ -10,16 +10,26 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
     public function login()
     {
         return view('auth.login');
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
     public function register()
     {
         return view('auth.register');
     }
 
+    /**
+     * @param LoginRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function singIn(LoginRequest $request)
     {
         $credentials = [
@@ -38,6 +48,10 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @param RegisterRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function singUp(RegisterRequest $request)
     {
         if (User::query()->firstWhere("name", '=', $request->get("login"))) {
@@ -61,6 +75,10 @@ class AuthController extends Controller
         return redirect()->route('welcome');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout(Request $request)
     {
         Auth::logout();
